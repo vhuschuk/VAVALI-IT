@@ -1,0 +1,57 @@
+#presentation {
+  background: url("/img/123.png");
+  height: 846px;
+  background-repeat: no-repeat;
+
+  background-size: cover;
+  background-position: center center;
+  border-bottom: 16px solid #679d41;
+  border-top: 16px solid #679d41;
+
+}
+
+.transparent{
+  height: 186px;
+  opacity: 0.72;
+  background-color: rgba(255,255,255,0.72);
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.name{
+  font-family: Open Sans, fantasy;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 52px;
+  color: #fffecd;
+  text-shadow: 2px 2px 2px rgba(0,0,0,0.63);
+}
+
+.news{
+  margin-top: 25px;
+}
+
+.card-name{
+  margin: 15px!important;
+  border: 5.0px solid #679d41;
+
+
+}
+.megaimg{
+  opacity: 0.65;
+  background-color: rgba(255,255,255,0.65);
+
+}
+h5.card-title{
+  font-family: Open Sans, fantasy;
+  font-size: 26px;
+  font-weight: 300;
+  color: #292929;
+}
+
+
+.card-img{
+  border: 2px solid;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
