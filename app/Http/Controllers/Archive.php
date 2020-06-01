@@ -18,18 +18,22 @@ class Archive extends Controller
             ]);
         }
 
-public function index()
+public function index(Request $request)
 {
+    
+    $id = $request->get('id');
+    //dd($id);
     $data = Post::orderBy('id', 'desc')
     
         ->take(1)
+        ->whereId($id)
         ->get();
-
+       
     $articles = Article::orderBy('author', 'asc')
          ->where('journal_id', $data[0]['id'])
          ->paginate(3);
-    return view('pages/archive_page', [
-        'data'=>$data, 
+    return view('pages/index', [
+        'journals'=>$data, 
         'articles'=>$articles,
         ]);
 }

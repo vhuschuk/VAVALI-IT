@@ -10,100 +10,50 @@
             </div>
             <div class="col-md-7">
                 <h2>Результати пошуку</h2>
+                <div class="col-md-8 offset-2">
+                <?php if(isset($newsearchnames)): ?>
+            <?php $__currentLoopData = $newsearchnames; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $newsearchname): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            
+                <div class="article">
+                    <span class="author"><?php echo e($newsearchname->author); ?></span> </b>
+                    <span class="title"><?php echo e($newsearchname->art_name); ?></span>
+                    <p class="atr-text"><?php echo e($newsearchname->art_description); ?></p>
+                    <button class="btn-pdf">PDF</button>
+                    <span class="data_article"><?php echo e($newsearchname->date); ?></span>
+                </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php endif; ?>
+              </div>
             </div>
         </div>
         <div class="row">
+        <form action = "" method = "POST">
+        <?php echo e(csrf_field()); ?>
+
+        <?php echo method_field('post'); ?>
             <div class="col-md-5">
                 <label for="validationDefault01">Пошуковий запит</label>
-                <input type="text" class="form-control" id="validationDefault01" value="Назва статті" required>
+                <input type="text" class="form-control" name="NameArticle" id="validationDefault01" value="Назва статті" >
                 <div>
                     <label for="validationDefault02">По автору</label>
-                    <input type="text" class="form-control" id="validationDefault02" value="Автор" required>
+                    <input type="text" class="form-control" name="NameAuthor" id="validationDefault02" value="Автор">
                 </div>
-                <div>
-                    <label for="validationDefault03">По ключовим словам</label>
-                    <input type="text" class="form-control" id="validationDefault03" value="Ключові слова" required>
-                </div>
+               
                 <p>За датою статті</p>
                 <div class="row">
-                    <div class="col-md-4">
-                        <select class="custom-select" size="2">
-                            <option selected>Оберіть рік</option>
-                            <option value="2015">2015</option>
-                            <option value="2016">2016</option>
-                            <option value="2017">2017</option>
-                            <option value="2018">2018</option>
-                            <option value="2019">2019</option>
-                            <option value="2020">2020</option>
-                        </select>
-                    </div>
+                    
                     <div class="col-md-5">
-                        <select class="custom-select month" size="2">
-                            <option selected>Оберіть місяць</option>
-                            <option value="1">Січень</option>
-                            <option value="2">Лютий</option>
-                            <option value="3">Березень</option>
-                            <option value="4">Квітень</option>
-                            <option value="5">Травень</option>
-                            <option value="6">Червень</option>
-                            <option value="7">Липень</option>
-                            <option value="8">Серпень</option>
-                            <option value="9">Вересень</option>
-                            <option value="10">Жовтень</option>
-                            <option value="11">Листопад</option>
-                            <option value="12">Грудень</option>
-                        </select>
-                        <input type="date" class="form-control calendar" id="date" name="date" placeholder="Дата"
-                            required>
+                        <input type="date"  id="date" name="date" placeholder="Дата" >
                         <div class="bn-sc">
                             <button class="btn-search" type="submit">Search</button>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <select class="custom-select" size="2">
-                            <option selected>Дата</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="25">25</option>
-                            <option value="26">26</option>
-                            <option value="27">27</option>
-                            <option value="28">28</option>
-                            <option value="29">29</option>
-                            <option value="30">30</option>
-                            <option value="31">31</option>
-                        </select>
-                    </div>
+                    
                 </div>
+                </form> 
             </div>
-            <div class="col-md-7">
-                <div class="row">
-                    <div class="col-md-12">
-                        <p class="search_result">Нічого не знайдено</p>
-                    </div>
-                </div>
-            </div>
+           
+            
         </div>
     </div>
 </div>

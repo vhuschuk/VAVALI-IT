@@ -1,4 +1,5 @@
 <?php $__env->startSection('content'); ?>
+
 <div id="presentation">
     <div class="transparent float-right d-flex justify-content-around align-content-stretch">
         <div class="d-flex flex-column justify-content-center">
@@ -11,7 +12,7 @@
     </div>
     <div class="clearfix"></div>
     <div class="card mb-3 mt-3 megaimg" style="max-width: 80%; margin: auto">
-           
+    
     <?php $__currentLoopData = $journals; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     
         <div class="row  card-name">
@@ -28,29 +29,47 @@
                 </div>
             </div>
         </div>
-         
-        <form action="<?php echo e(action('Journalmain@edit')); ?>" method="POST">
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <?php echo e($flag = \Session::get('flag')); ?>
+
+        <?php if($flag ==true): ?> 
+        <?php $__currentLoopData = $journals; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <form action="<?php echo e(action('Journalmain@edit', $i->id)); ?>" method="POST">
         <?php echo e(csrf_field()); ?>
 
         <?php echo method_field('post'); ?>
-                        <button type="submit" id="<?php echo e($i->id); ?>" class="btn btn-danger">
+                        <button type="submit" id="<?php echo e($i); ?>" class="btn btn-danger">
                         <i class="fa fa-btn fa-trash"></i>Редагувати
+                    </button>
+                </form> 
+
+
+                <form action="<?php echo e(action('Journalmain@delete',  $i->id)); ?>" method="POST">
+        <?php echo e(csrf_field()); ?>
+
+        <?php echo method_field('post'); ?>
+                        <button type="submit" id="<?php echo e($i); ?>" class="btn btn-danger">
+                        <i class="fa fa-btn fa-trash"></i>Видалити
                     </button>
                 </form> 
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 
-         
-                   
+                  <button type="text"  class="btn btn-primary">
+                <a href="/add" class="fa fa-btn fa-trash"  >Додати пост</a> 
+                </button>
+        <?php endif; ?>  
+                         
     </div>
     </div>
 <div class="clearfix"></div>
-
+<div class="clearfix"></div>
 <div class="container-fluid articles">
     <div class="container art">
         <div class="row">
             <div class="col-md-12">
                 <h1>
                     НАЗВА ЖУРНАЛУ
+                                   
                 </h1>
                 <h2>
                     Статті:
@@ -64,7 +83,8 @@
                     <span class="author"><?php echo e($art->author); ?></span>
                     <span class="title"><?php echo e($art->art_name); ?></span>
                     <p class="atr-text"><?php echo e($art->art_description); ?></p>
-                    <button class="btn-pdf">PDF</button>
+                    <button class="btn-pdf">
+                    <a href="/pdf/<?php echo e($art->pdf_article); ?>"> PDF</a></button>
                     <span class="data_article"><?php echo e($art->date); ?></span>
                 </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

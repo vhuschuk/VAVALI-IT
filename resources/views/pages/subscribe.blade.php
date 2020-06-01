@@ -9,15 +9,25 @@
         </div>
         <form action = "/create" method = "post">
     <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
+    @if (count($errors) > 0)
+  <div class="alert alert-danger">
+    <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  </div>
+@endif
             <table>
                 <tr>
                     <td> Ваше ім'я</td>
-                    <td><input type='text' name='name' /></td>
+                    <td><input type='text' name='name' value="{{ old('name') }}" /></td>
+                   
                 </tr>
 
                 <tr>
                     <td>Ваша пошта</td>
-                    <td><input type="text" name='email'/></td>
+                    <td><input type="text" name='email' value="{{ old('email') }}"/></td>
                 </tr>
 
                 <tr>

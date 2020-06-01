@@ -1,6 +1,7 @@
 @extends ('layout')
 
 @section('content')
+
 <div id="presentation">
     <div class="transparent float-right d-flex justify-content-around align-content-stretch">
         <div class="d-flex flex-column justify-content-center">
@@ -13,7 +14,7 @@
     </div>
     <div class="clearfix"></div>
     <div class="card mb-3 mt-3 megaimg" style="max-width: 80%; margin: auto">
-           
+    
     @foreach($journals  as $i)
     
         <div class="row  card-name">
@@ -30,28 +31,44 @@
                 </div>
             </div>
         </div>
-         
-        <form action="{{ action('Journalmain@edit') }}" method="POST">
+        @endforeach
+        {{$flag = \Session::get('flag') }}
+        @if ($flag ==true) 
+        @foreach($journals  as $i)
+        <form action="{{ action('Journalmain@edit', $i->id) }}" method="POST">
         {{ csrf_field() }}
         @method('post')
-                        <button type="submit" id="{{ $i->id }}" class="btn btn-danger">
+                        <button type="submit" id="{{$i}}" class="btn btn-danger">
                         <i class="fa fa-btn fa-trash"></i>Редагувати
+                    </button>
+                </form> 
+
+
+                <form action="{{ action('Journalmain@delete',  $i->id) }}" method="POST">
+        {{ csrf_field() }}
+        @method('post')
+                        <button type="submit" id="{{$i}}" class="btn btn-danger">
+                        <i class="fa fa-btn fa-trash"></i>Видалити
                     </button>
                 </form> 
     @endforeach
                 
-         
-                   
+                  <button type="text"  class="btn btn-primary">
+                <a href="/add" class="fa fa-btn fa-trash"  >Додати пост</a> 
+                </button>
+        @endif  
+                         
     </div>
     </div>
 <div class="clearfix"></div>
-
+<div class="clearfix"></div>
 <div class="container-fluid articles">
     <div class="container art">
         <div class="row">
             <div class="col-md-12">
                 <h1>
                     НАЗВА ЖУРНАЛУ
+                                   
                 </h1>
                 <h2>
                     Статті:
@@ -65,7 +82,8 @@
                     <span class="author">{{$art->author}}</span>
                     <span class="title">{{$art->art_name}}</span>
                     <p class="atr-text">{{$art->art_description}}</p>
-                    <button class="btn-pdf">PDF</button>
+                    <button class="btn-pdf">
+                    <a href="/pdf/{{$art->pdf_article}}"> PDF</a></button>
                     <span class="data_article">{{$art->date}}</span>
                 </div>
                 @endforeach

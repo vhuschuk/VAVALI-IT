@@ -7,15 +7,25 @@
         </div>
         <form action = "/create" method = "post">
     <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
+    <?php if(count($errors) > 0): ?>
+  <div class="alert alert-danger">
+    <ul>
+      <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <li><?php echo e($error); ?></li>
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </ul>
+  </div>
+<?php endif; ?>
             <table>
                 <tr>
                     <td> Ваше ім'я</td>
-                    <td><input type='text' name='name' /></td>
+                    <td><input type='text' name='name' value="<?php echo e(old('name')); ?>" /></td>
+                   
                 </tr>
 
                 <tr>
                     <td>Ваша пошта</td>
-                    <td><input type="text" name='email'/></td>
+                    <td><input type="text" name='email' value="<?php echo e(old('email')); ?>"/></td>
                 </tr>
 
                 <tr>

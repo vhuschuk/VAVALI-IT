@@ -5,20 +5,32 @@
             Архіви
         </h1>
         <div class="flex-container">
-      
+        <?php $__currentLoopData = $archive; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $arch): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="row three_bloks">
-            <?php $__currentLoopData = $archive; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $arch): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="col-sm-12 col-md-4 col-lg-4">
+            
+            
+            <form action = "/archindex" method = "POST">
+        <?php echo e(csrf_field()); ?>
+
+        <?php echo method_field('post'); ?>
+                <div class="col-sm-4 col-md-4 col-lg-4">
                     <div class="output">
                         <div class="cover">
                         <img src="<?php echo e($arch->img); ?>" class="card-img" alt="...">
                         </div>
-                        <a href='/archive_page'><?php echo e($arch->journal_number); ?></a>
+                        <p><?php echo e($arch->journal_number); ?></p>
+                        <input type = 'hidden' name='id' value = '<?php echo e($arch->id); ?>'/>
                         <p><?php echo e($arch->date); ?></p>
                     </div>
                 </div> 
+                <button type="submit" id="<?php echo e($arch->id); ?>" value = '<?php echo e($arch->id); ?>' class="btn btn-danger">
+                        <i class="fa fa-btn fa-trash"></i>Відкрити Архів
+                    </button>
+                    </form>
+                    </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            </div>
+                
+                
        
              
         </div>

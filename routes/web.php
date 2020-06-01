@@ -32,14 +32,34 @@ Route:: get ('/maineditor', function () {
     return view ('pages.maineditor');
 });
 Route:: get ('/records',  'Archive@archive');
-Route:: get ('/archive_page',  'Archive@index');
+Route:: post ('/archindex',  'Archive@index');
 Route:: get ('/reviewers', 'Page@reviewers');
 
-Route:: get ('/search', function () {
-    return view ('pages.search');
-});
+//Route:: get ('/search', function () {
+ //   return view ('pages.search');
+//});
 
 //admin 
-Route:: post ('/edit', 'Journalmain@edit');
+Route:: get ('/admin', function () {
+    return view ('pages.admin');
+});
 
-//Route::delete('/{i}', 'Journalmain@destroy')->name('journal.delete');
+Route::post('login','AdminController@login');
+// редагування
+Route:: post ('/journals/edit', 'Journalmain@edit');
+Route:: post ('/journals/save', 'Journalmain@save');
+// додавання
+Route:: get ('/add', 'Journalmain@add');
+Route::post('addjournal','Journalmain@insertjournals');
+//видалення 
+Route:: post ('/journals/dalete', 'Journalmain@delete');
+
+//Route::post('/{i}', 'Journalmain@destroy')->name('journal.delete');
+
+// Пошук 
+Route:: get ('/search', 'SearchController@searchPage');
+Route:: post ('/search', 'SearchController@add');
+
+//СКАЧУВАННЯ СТАТЕЙ 
+Route::get('/pdf/{file}', 'Journalmain@download');
+//end
